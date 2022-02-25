@@ -1,0 +1,8 @@
+---
+namespace: meta
+resources:
+- manifests/persistentvolumeclaim.yaml
+- manifests/secret.uplink-nl-ams-scw-registry.yaml
+- manifests/deployment.yaml
+- manifests/service.yaml
+- manifests/rbac.yaml
