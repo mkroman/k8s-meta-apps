@@ -51,7 +51,15 @@ spec:
           mountPath: /meta/cache
         - name: meta-webm
           mountPath: /data/webm
-
+      - name: postgres
+        image: flyio/flyctl:v0.0.303
+        args: ["proxy", "-a", "meta", "5432"]
+        env:
+        - name: FLY_ACCESS_TOKEN
+          value: vault:secret/data/meta#FLY_ACCESS_TOKEN
+        ports:
+        - name: postgres
+          containerPort: 5432
       # The mail reader container
       - name: mail-reader
         image: mkroman/meta-mail_reader:v0.1.6-2
