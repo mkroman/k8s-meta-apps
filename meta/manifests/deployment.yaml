@@ -30,7 +30,7 @@ spec:
         env:
         - name: BLUR_ENV
           value: production
-        command: ["/bin/sh", "-c", "mkdir /meta/cache; bundle exec sequel -m /meta/migrations sqlite:///meta/cache/database.db"]
+        command: ["/bin/sh", "-c", "mkdir /meta/cache; bundle exec sequel -m /meta/migrations \"${DATABASE_URL}\""]
         volumeMounts:
         - name: meta-cache
           mountPath: /meta/cache
