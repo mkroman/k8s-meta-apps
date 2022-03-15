@@ -3,6 +3,7 @@ namespace: meta
 resources:
 - manifests/persistentvolumeclaim.yaml
 - manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
+- manifests/sealedsecret.meta-env.yaml
 - manifests/deployment.yaml
 - manifests/service.yaml
 - manifests/rbac.yaml

@@ -51,6 +51,9 @@ spec:
           mountPath: /meta/cache
         - name: meta-webm
           mountPath: /data/webm
+        envFrom:
+        - secretRef:
+            name: meta-env
       # The mail reader container
       - name: mail-reader
         image: mkroman/meta-mail_reader:v0.1.6-2
