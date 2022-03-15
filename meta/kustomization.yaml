@@ -6,3 +6,8 @@ resources:
 - manifests/deployment.yaml
 - manifests/service.yaml
 - manifests/rbac.yaml
+- manifests/sealedsecret.postgres-auth.yaml
+- manifests/sealedsecret.postgres-backup.yaml
+- manifests/sealedsecret.rwx-im-scw-cr-auth.yaml
+- manifests/configmap.yaml
+- manifests/kubegres.yaml
