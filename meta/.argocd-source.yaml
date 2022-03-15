@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - rg.nl-ams.scw.cloud/uplink/meta=rg.nl-ams.scw.cloud/uplink/meta:31c4771d34cecf448da11ee320233904ac37f10e
+  - rg.nl-ams.scw.cloud/uplink/meta=rg.nl-ams.scw.cloud/uplink/meta:020c0e0a5c98a6a3d3832f26eee7036ee3f50e5a
