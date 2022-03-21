@@ -2,4 +2,5 @@ resources:
 - manifests/deployment.yaml
 - manifests/service.yaml
 - manifests/middleware.yaml
+- manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
 - manifests/ingressroute.yaml
