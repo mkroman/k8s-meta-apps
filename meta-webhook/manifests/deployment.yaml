@@ -27,7 +27,7 @@ spec:
         - name: RACK_ENV
           value: production
         - name: META_RPC_URL
-          value: tcp://meta-rpc:31337
+          value: tcp://meta-rpc.meta.svc:31337
         - name: META_RPC_SECRET
           value: vault:secret/data/meta#RPC_SECRET
         - name: META_WEBHOOK_TOKEN
