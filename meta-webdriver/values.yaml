@@ -29,6 +29,8 @@ service:
 extraEnv:
 - name: RUST_BACKTRACE
   value: full
+- name: RUST_LOG
+  value: meta_webdriver=debug
 
 resources:
   limits:
