@@ -26,6 +26,10 @@ service:
   type: ClusterIP
   port: 3000
 
+extraEnv:
+- name: RUST_BACKTRACE
+  value: full
+
 resources:
   limits:
     cpu: 500m
