@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: workflow-creator
+  namespace: meta-deployments
+rules:
+- apiGroups:
+  - workflows.argoproj.io
+  resources:
+  - workflows
+  verbs:
+  - create

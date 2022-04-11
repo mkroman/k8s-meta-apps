@@ -6,7 +6,7 @@ metadata:
   namespace: mkroman-github-events
 spec:
   template:
-    serviceAccountName: deployment-patch-sa
+    serviceAccountName: meta-deployments-workflow-creator
   dependencies:
   - name: github
     eventSourceName: github
