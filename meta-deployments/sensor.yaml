@@ -51,7 +51,7 @@ spec:
                 arguments:
                   parameters:
                   - name: image_tag
-                    value: {{ inputs.parameters.image_tag }}
+                    value: '{{ inputs.parameters.image_tag }}'
           parameters:
           - src:
               dependencyName: github
