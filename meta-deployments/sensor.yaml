@@ -54,9 +54,9 @@ spec:
                       parameters:
                       - name: image_tag
                         value: '{{ workflow.parameters.image_tag }}'
-          parameters:
-          - src:
-              dependencyName: github
-              dataKey: body.deployment.sha
-            dest: spec.arguments.parameters.0.value
-            operation: append
+        parameters:
+        - src:
+            dependencyName: github
+            dataKey: body.deployment.sha
+          dest: spec.arguments.parameters.0.value
+          operation: append
