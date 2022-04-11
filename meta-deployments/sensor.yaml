@@ -39,12 +39,12 @@ spec:
               namespace: meta-deployments
             spec:
               entrypoint: main
-              arguments:
-                parameters:
-                - name: image_tag
-                  value: sha-
               templates:
               - name: main
+                arguments:
+                  parameters:
+                  - name: image_tag
+                    value: sha-
                 steps:
                 - - name: deploy
                     templateRef:
@@ -58,5 +58,5 @@ spec:
           - src:
               dependencyName: github
               dataKey: body.deployment.sha
-            dest: spec.arguments.parameters.0.value
+            dest: spec.templates.0.arguments.parameters.0.value
             operation: append
