@@ -36,6 +36,7 @@ spec:
             kind: Workflow
             metadata:
               generateName: meta-deployment-
+              namespace: meta-deployments
             spec:
               entrypoint: main
               arguments:
