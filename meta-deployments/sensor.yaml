@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: meta-deployment-sensor
-  namespace: argo-events
+  namespace: mkroman-github-events
 spec:
   template:
     serviceAccountName: deployment-patch-sa
