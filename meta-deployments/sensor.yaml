@@ -38,13 +38,13 @@ spec:
               generateName: meta-deployment-
               namespace: meta-deployments
             spec:
+              arguments:
+                parameters:
+                - name: image_tag
+                  value: sha-
               entrypoint: main
               templates:
               - name: main
-                arguments:
-                  parameters:
-                  - name: image_tag
-                    value: sha-
                 steps:
                 - - name: deploy
                     templateRef:
@@ -53,10 +53,10 @@ spec:
                     arguments:
                       parameters:
                       - name: image_tag
-                        value: '{{ inputs.parameters.image_tag }}'
+                        value: '{{ workflow.parameters.image_tag }}'
           parameters:
           - src:
               dependencyName: github
               dataKey: body.deployment.sha
-            dest: spec.templates.0.arguments.parameters.0.value
+            dest: spec.arguments.parameters.0.value
             operation: append
