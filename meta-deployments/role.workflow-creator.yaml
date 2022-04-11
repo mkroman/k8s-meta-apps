@@ -5,7 +5,7 @@ metadata:
   namespace: meta-deployments
 rules:
 - apiGroups:
-  - workflows.argoproj.io
+  - argoproj.io
   resources:
   - workflows
   verbs:
