@@ -1,0 +1,118 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: git-v0.0.1
+spec:
+  templates:
+  - name: clone
+    inputs:
+      parameters:
+      # The URL of the Git repo to clone.
+      - name: repo
+      # The specific revision to check out.
+      - name: revision
+        default: main
+      # The name of the Secret that contains the private key for cloning over
+      # SSH.
+      - name: sshPrivateKeySecretName
+      # The name of the key inside the Secret referenced to by
+      # `sshPrivateKeySecretName`.
+      - name: sshPrivateKeySecretKey
+        default: ssh-private-key
+      artifacts:
+      - name: repo
+        path: /workspace
+        git:
+          depth: 1
+          repo: '{{ inputs.parameters.repo }}'
+          revision: '{{ inputs.parameters.revision }}'
+          sshPrivateKeySecret:
+            name: '{{ inputs.parameters.sshPrivateKeySecretName }}'
+            key: '{{ inputs.parameters.sshPrivateKeySecretKey }}'
+    outputs:
+      artifacts:
+      - name: repo
+        path: /workspace
+    container:
+      image: alpine
+      workingDir: '{{ inputs.artifacts.repo.path }}'
+      command: [sh, -c]
+      args: [ls -al]
+
+  - name: commit
+    inputs:
+      parameters:
+      # The commit message.
+      - name: message
+      # The git users name.
+      - name: user_name
+      # The git users e-mail.
+      - name: user_email
+      # The pathspec of files to add.
+      - name: pathspec
+        default: .
+      # Whether or not to push after comitting.
+      - name: push
+        enum:
+        - 'true'
+        - 'false'
+        default: 'true'
+      # The name of the Secret that contains the private key for cloning over
+      # SSH.
+      - name: sshPrivateKeySecretName
+      # The name of the key inside the Secret referenced to by
+      # `sshPrivateKeySecretName`.
+      - name: sshPrivateKeySecretKey
+        default: ssh-private-key
+      artifacts:
+      - name: repo
+        path: /workspace
+    volumes:
+    - name: ssh-key
+      secret:
+        secretName: "{{ inputs.parameters.sshPrivateKeySecretName }}"
+        items:
+        - key: "{{ inputs.parameters.sshPrivateKeySecretKey }}"
+          path: "ssh-private-key"
+    script:
+      image: ghcr.io/mkroman/alpine:3.15.4-2
+      command: [/bin/bash]
+      env:
+      - name: GIT_USER_NAME
+        value: '{{ inputs.parameters.user_name }}'
+      - name: GIT_USER_EMAIL
+        value: '{{ inputs.parameters.user_email }}'
+      - name: MESSAGE
+        value: '{{ inputs.parameters.message }}'
+      - name: GIT_PATHSPEC
+        value: '{{ inputs.parameters.pathspec }}'
+      volumeMounts:
+      - name: ssh-key
+        mountPath: /etc/secrets
+        readOnly: true
+      source: |
+        set -o errexit
+        set -o pipefail
+        set -o xtrace
+
+        mkdir ~/.ssh
+        install -m0400 /etc/secrets/ssh-private-key ~/.ssh/id_ecdsa
+        ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+        cd "{{ inputs.artifacts.repo.path }}"
+
+        cat .git/config
+
+        env
+
+        git config --global user.name "${GIT_USER_NAME}"
+        git config --global user.email "${GIT_USER_EMAIL}"
+
+        git add -v "${GIT_PATHSPEC}"
+        git commit -m "${MESSAGE}"
+
+        git log -n 1
+
+        if [[ "{{ inputs.parameters.push }}" == "true" ]]; then
+          git push origin main
+        fi

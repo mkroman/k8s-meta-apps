@@ -1,0 +1,77 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: deploy
+spec:
+  entrypoint: main
+  templates:
+  - name: main
+    inputs:
+      parameters:
+      - name: image_tag
+    steps:
+    - - name: clone
+        templateRef:
+          name: git-v0.0.1
+          template: clone
+        arguments:
+          parameters:
+          - name: repo
+            value: git@github.com:mkroman/k8s-meta-apps
+          - name: sshPrivateKeySecretName
+            value: meta-deploy-ssh-key
+    - - name: update-image
+        template: update-image
+        arguments:
+          artifacts:
+          - name: repo
+            from: '{{ steps.clone.outputs.artifacts.repo }}'
+          parameters:
+          - name: image_tag
+            value: '{{ inputs.parameters.image_tag }}'
+    - - name: push
+        templateRef:
+          name: git-v0.0.1
+          template: commit
+        arguments:
+          parameters:
+          - name: user_name
+            value: 'Mikkel Kroman'
+          - name: user_email
+            value: 'mk@maero.dk'
+          - name: message
+            value: >-
+              Updating meta to {{ inputs.parameters.image_tag }}
+          - name: sshPrivateKeySecretName
+            value: meta-deploy-ssh-key
+          artifacts:
+          - name: repo
+            from: '{{ steps.update-image.outputs.artifacts.repo }}'
+
+  - name: update-image
+    inputs:
+      artifacts:
+      - name: repo
+        path: /workspace
+      parameters:
+      - name: image_tag
+    outputs:
+      artifacts:
+      - name: repo
+        path: /workspace
+    script:
+      image: ghcr.io/mkroman/alpine:3.15.4-2
+      command: [bash]
+      env:
+      - name: IMAGE_TAG
+        value: '{{ inputs.parameters.image_tag }}'
+      source: |
+        set -o errexit
+        set -o pipefail
+        set -o xtrace
+
+        cd "{{ inputs.artifacts.repo.path }}"
+
+        env
+
+        yq -i '.kustomize.images[0] = "rg.nl-ams.scw.cloud/uplink/meta=rg.nl-ams.scw.cloud/uplink/meta:" + strenv(IMAGE_TAG)' meta/.argocd-source.yaml

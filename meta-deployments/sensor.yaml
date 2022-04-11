@@ -1,0 +1,59 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: meta-deployment-sensor
+  namespace: argo-events
+spec:
+  template:
+    serviceAccountName: deployment-patch-sa
+  dependencies:
+  - name: github
+    eventSourceName: github
+    eventName: meta
+    filters:
+      data:
+      - path: body.repository.full_name
+        type: string
+        value:
+        - mkroman/meta
+      - path: body.X-GitHub-Event
+        type: string
+        value:
+        - deployment
+      - path: body.action
+        type: string
+        value:
+        - created
+  triggers:
+  - template:
+      name: workflow-trigger
+      k8s:
+        operation: create
+        source:
+          resource:
+            apiVersion: argoproj.io/v1alpha1
+            kind: Workflow
+            metadata:
+              generateName: meta-deployment-
+            spec:
+              entrypoint: main
+              arguments:
+                parameters:
+                - name: image_tag
+                  value: sha-
+              templates:
+              - name: main
+                templateRef:
+                  name: deploy
+                  template: main
+                arguments:
+                  parameters:
+                  - name: image_tag
+                    value: sha-
+          parameters:
+          - src:
+              dependencyName: github
+              dataKey: body.deployment.sha
+            dest: spec.arguments.parameters.0.value
+            operation: append
