@@ -11,4 +11,3 @@ resources:
 - manifests/sealedsecret.postgres-backup.yaml
 - manifests/sealedsecret.rwx-im-scw-cr-auth.yaml
 - manifests/configmap.yaml
-- manifests/kubegres.yaml
