@@ -17,6 +17,7 @@ spec:
         secretAccessKey:
           key: AWS_SECRET_ACCESS_KEY
           name: postgres-backup
+  retentionPolicy: "30d"
   storage:
     size: 2Gi
     storageClass: ssd
