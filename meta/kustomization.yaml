@@ -12,3 +12,4 @@ resources:
 - manifests/sealedsecret.rwx-im-scw-cr-auth.yaml
 - manifests/configmap.yaml
 - manifests/cluster.yaml
+- manifests/scheduledbackup.postgres.yaml
