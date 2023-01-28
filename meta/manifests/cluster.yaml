@@ -28,3 +28,6 @@ spec:
   walStorage:
     size: 2Gi
     storageClass: ssd
+
+  monitoring:
+    enablePodMonitor: true
