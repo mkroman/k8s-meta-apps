@@ -3,7 +3,7 @@ kind: ScheduledBackup
 metadata:
   name: postgres-backup
 spec:
-  schedule: "43 35 2 * * *"
+  schedule: "43 37 1 * * *"
   backupOwnerReference: self
   cluster:
     name: postgres
