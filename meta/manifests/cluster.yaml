@@ -17,11 +17,11 @@ spec:
         secretAccessKey:
           key: AWS_SECRET_ACCESS_KEY
           name: postgres-backup
+      tags:
+        backupRetentionPolicy: "expire"
+      historyTags:
+        backupRetentionPolicy: "keep"
     retentionPolicy: "30d"
-    tags:
-      backupRetentionPolicy: "expire"
-    historyTags:
-      backupRetentionPolicy: "keep"
   storage:
     size: 2Gi
     storageClass: ssd
