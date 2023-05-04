@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: meta
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: uplink-nl-ams-scw-registry
+      initContainers:
+      - name: meta-migrate-db
+        env:
+        - name: BLUR_ENV
+          value: production
+      containers:
+      - name: meta
+        env:
+        - name: BLUR_ENV
+          value: production

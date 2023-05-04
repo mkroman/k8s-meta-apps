@@ -1,0 +1,13 @@
+patches:
+- path: ./patches/deployment.yaml
+  target:
+    kind: Deployment
+
+resources:
+- ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
+- ./manifests/sealedsecret.meta-env.yaml
+- ./manifests/sealedsecret.meta-mailreader.yaml
+- ./manifests/sealedsecret.postgres-backup.yaml
+- ../../base
+- ./manifests/cluster.postgres.yaml
+- ./manifests/scheduledbackup.postgres.yaml

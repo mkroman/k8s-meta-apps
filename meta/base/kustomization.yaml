@@ -1,0 +1,8 @@
+resources:
+- ./manifests/persistentvolumeclaim.yaml
+- ./manifests/deployment.yaml
+- ./manifests/service.yaml
+
+commonLabels:
+  app.kubernetes.io/name: meta
+  app.kubernetes.io/part-of: meta

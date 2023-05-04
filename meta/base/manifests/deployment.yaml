@@ -4,27 +4,15 @@ kind: Deployment
 metadata:
   name: meta
   namespace: meta
-  labels:
-    app: meta
-    app.kubernetes.io/name: meta
 spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: meta
   # Template for the created pods
   template:
     metadata:
       namespace: meta
-      labels:
-        app.kubernetes.io/name: meta
     spec:
-      serviceAccountName: default
       initContainers:
       - name: meta-migrate-db
         image: rg.nl-ams.scw.cloud/uplink/meta:latest
-        env:
-        - name: BLUR_ENV
-          value: production
         command: ["/bin/sh", "-c", "mkdir /meta/cache; bundle exec sequel -m /meta/migrations \"${DATABASE_URL}\""]
         volumeMounts:
         - name: meta-cache
@@ -32,18 +20,18 @@ spec:
         envFrom:
         - secretRef:
             name: meta-env
-
       containers:
       # The bot container
       - name: meta
         image: rg.nl-ams.scw.cloud/uplink/meta:latest
         env:
-        - name: BLUR_ENV
-          value: production
         - name: TZ
           value: Europe/Copenhagen
-        args:
-        - "-v"
+        args: [-v]
+        securityContext:
+          capabilities:
+            drop:
+            - NET_RAW
         volumeMounts:
         - name: meta-cache
           mountPath: /meta/cache
@@ -52,6 +40,7 @@ spec:
         envFrom:
         - secretRef:
             name: meta-env
+
       # The mail reader container
       - name: mail-reader
         image: rg.nl-ams.scw.cloud/uplink/meta-mail_reader:0.1.8
@@ -85,13 +74,13 @@ spec:
             secretKeyRef:
               name: meta-mailreader
               key: rpc-secret
-
-      imagePullSecrets:
-      - name: uplink-nl-ams-scw-registry
+        securityContext:
+          capabilities:
+            drop:
+            - NET_RAW
       volumes:
       - name: meta-cache
         persistentVolumeClaim:
           claimName: meta-cache
       - name: meta-webm
         emptyDir: {}
-

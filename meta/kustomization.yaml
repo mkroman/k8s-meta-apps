@@ -1,16 +1,4 @@
 ---
 namespace: meta
 resources:
-- manifests/persistentvolumeclaim.yaml
-- manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
-- manifests/sealedsecret.meta-env.yaml
-- manifests/sealedsecret.meta-mailreader.yaml
-- manifests/deployment.yaml
-- manifests/service.yaml
-- manifests/rbac.yaml
-- manifests/sealedsecret.postgres-auth.yaml
-- manifests/sealedsecret.postgres-backup.yaml
-- manifests/sealedsecret.rwx-im-scw-cr-auth.yaml
-- manifests/configmap.yaml
-- manifests/cluster.yaml
-- manifests/scheduledbackup.postgres.yaml
+- ./overlays/production

@@ -4,8 +4,6 @@ kind: Service
 metadata:
   name: meta-rpc
 spec:
-  selector:
-    app.kubernetes.io/name: meta
   type: ClusterIP
   ports:
   - name: rpc
