@@ -17,11 +17,6 @@ spec:
       namespace: meta
       labels:
         app.kubernetes.io/name: meta
-      annotations:
-        linkerd.io/inject: enabled
-        vault.security.banzaicloud.io/vault-role: meta
-        vault.security.banzaicloud.io/vault-addr: "https://vault.default:8200"
-        vault.security.banzaicloud.io/vault-tls-secret: vault-tls
     spec:
       serviceAccountName: default
       initContainers:
@@ -66,15 +61,30 @@ spec:
         - name: AWS_REGION
           value: eu-north-1
         - name: AWS_ACCESS_KEY
-          value: vault:secret/data/meta/aws#AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: meta-mailreader
+              key: aws-access-key
         - name: AWS_SECRET_KEY
-          value: vault:secret/data/meta/aws#AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: meta-mailreader
+              key: aws-secret-access-key
         - name: IMAP_USERNAME
-          value: vault:secret/data/meta/mail#IMAP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: meta-mailreader
+              key: imap-username
         - name: IMAP_PASSWORD
-          value: vault:secret/data/meta/mail#IMAP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: meta-mailreader
+              key: imap-password
         - name: RPC_SECRET
-          value: vault:secret/data/meta#RPC_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: meta-mailreader
+              key: rpc-secret
 
       imagePullSecrets:
       - name: uplink-nl-ams-scw-registry
