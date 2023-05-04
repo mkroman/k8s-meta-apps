@@ -1,0 +1,6 @@
+patches:
+- path: patches/deployment.yaml
+  target:
+    kind: Deployment
+resources:
+- ../../base/meta-oss

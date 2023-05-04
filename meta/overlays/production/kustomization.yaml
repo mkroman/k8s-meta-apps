@@ -8,6 +8,6 @@ resources:
 - ./manifests/sealedsecret.meta-env.yaml
 - ./manifests/sealedsecret.meta-mailreader.yaml
 - ./manifests/sealedsecret.postgres-backup.yaml
-- ../../base
+- ../../base/meta
 - ./manifests/cluster.postgres.yaml
 - ./manifests/scheduledbackup.postgres.yaml

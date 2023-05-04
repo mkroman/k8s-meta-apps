@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meta-oss
+  namespace: meta-oss
+spec:
+  # Template for the created pods
+  template:
+    metadata:
+      namespace: meta-oss
+    spec:
+      containers:
+      # The bot container
+      - name: meta-oss
+        image: ghcr.io/rwx-im/meta:edge
+        env:
+        - name: TZ
+          value: Europe/Copenhagen
+        args: [-v]
+        securityContext:
+          capabilities:
+            drop:
+            - ALL

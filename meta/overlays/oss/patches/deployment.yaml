@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: meta-oss
+spec:
+  template:
+    spec:
+      containers:
+      - name: meta-oss
+        env:
+        - name: BLUR_ENV
+          value: production
