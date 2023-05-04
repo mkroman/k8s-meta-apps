@@ -4,3 +4,7 @@ patches:
     kind: Deployment
 resources:
 - ../../base/meta-oss
+
+images:
+- name: ghcr.io/rwx-im/meta:edge
+  newTag: sha-5371a49b70fd5d26df5075c17ada6debeb5fafaf
