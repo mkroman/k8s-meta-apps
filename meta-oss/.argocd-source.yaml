@@ -1,4 +1,0 @@
-helm:
-  parameters:
-  - name: image.tag
-    value: sha-5371a49b70fd5d26df5075c17ada6debeb5fafaf

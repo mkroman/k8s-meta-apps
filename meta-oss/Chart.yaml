@@ -1,4 +1,0 @@
-apiVersion: v2
-name: meta-oss
-description: A Helm chart for the open source version of meta
-version: 0.1.0
