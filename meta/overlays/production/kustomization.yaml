@@ -4,7 +4,7 @@ patches:
     kind: Deployment
 
 images:
-- name: image: rg.nl-ams.scw.cloud/uplink/meta
+- name: rg.nl-ams.scw.cloud/uplink/meta
   newTag: sha-6e94f8a920feaebf2641045a86d1959a79a01c51
 
 resources:
