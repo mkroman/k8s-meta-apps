@@ -5,7 +5,7 @@ patches:
 
 images:
 - name: rg.nl-ams.scw.cloud/uplink/meta
-  newTag: sha-dfe716a41d5ca77700fb21636b1a4040e27b602c
+  newTag: sha-aeaecbf52307e060aaae9454114f2cde171afb26
 
 resources:
 - ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
