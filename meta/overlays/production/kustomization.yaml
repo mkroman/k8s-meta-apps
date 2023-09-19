@@ -13,5 +13,5 @@ resources:
 - ./manifests/sealedsecret.meta-mailreader.yaml
 - ./manifests/sealedsecret.postgres-backup.yaml
 - ../../base/meta
-# - ./manifests/cluster.postgres.yaml
+- ./manifests/cluster.postgres.yaml
 - ./manifests/scheduledbackup.postgres.yaml
