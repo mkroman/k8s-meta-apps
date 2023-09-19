@@ -4,8 +4,11 @@ metadata:
   name: postgres
 spec:
   instances: 2
+  imageName: ghcr.io/cloudnative-pg/postgresql:14
+
   backup:
     barmanObjectStore:
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
       destinationPath: s3://meta-postgres-backup
       s3Credentials:
         accessKeyId:
@@ -22,11 +25,38 @@ spec:
       historyTags:
         backupRetentionPolicy: "keep"
     retentionPolicy: "30d"
+  
+  # bootstrap:
+  #   recovery:
+  #     source: clusterBackup
+  #     recoveryTarget:
+  #       backupID: 20230617T011555
+  #       targetImmediate: true
+
+  # externalClusters:
+  # - name: clusterBackup
+  #   barmanObjectStore:
+  #     destinationPath: s3://meta-postgres-backup
+  #     serverName: postgres
+  #     s3Credentials:
+  #       accessKeyId:
+  #         key: AWS_ACCESS_KEY_ID
+  #         name: postgres-backup
+  #       region:
+  #         key: AWS_REGION
+  #         name: postgres-backup
+  #       secretAccessKey:
+  #         key: AWS_SECRET_ACCESS_KEY
+  #         name: postgres-backup
+  #     wal:
+  #       maxParallel: 8
+
   storage:
-    size: 2Gi
+    size: 5Gi
     storageClass: ssd
+
   walStorage:
-    size: 2Gi
+    size: 5Gi
     storageClass: ssd
 
   monitoring:
