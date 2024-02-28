@@ -26,30 +26,30 @@ spec:
       #   backupRetentionPolicy: "keep"
     retentionPolicy: "30d"
   
-  # bootstrap:
-  #   recovery:
-  #     source: clusterBackup
-  #     recoveryTarget:
-  #       backupID: 20230617T011555
-  #       targetImmediate: true
+  bootstrap:
+    recovery:
+      source: clusterBackup
+      # recoveryTarget:
+      #   backupID: 20230617T011555
+      #   targetImmediate: true
 
-  # externalClusters:
-  # - name: clusterBackup
-  #   barmanObjectStore:
-  #     destinationPath: s3://meta-postgres-backup
-  #     serverName: postgres
-  #     s3Credentials:
-  #       accessKeyId:
-  #         key: AWS_ACCESS_KEY_ID
-  #         name: postgres-backup
-  #       region:
-  #         key: AWS_REGION
-  #         name: postgres-backup
-  #       secretAccessKey:
-  #         key: AWS_SECRET_ACCESS_KEY
-  #         name: postgres-backup
-  #     wal:
-  #       maxParallel: 8
+  externalClusters:
+  - name: clusterBackup
+    barmanObjectStore:
+      destinationPath: s3://meta-postgres-backup
+      serverName: postgres
+      s3Credentials:
+        accessKeyId:
+          key: AWS_ACCESS_KEY_ID
+          name: postgres-backup
+        region:
+          key: AWS_REGION
+          name: postgres-backup
+        secretAccessKey:
+          key: AWS_SECRET_ACCESS_KEY
+          name: postgres-backup
+      wal:
+        maxParallel: 8
 
   storage:
     size: 5Gi
