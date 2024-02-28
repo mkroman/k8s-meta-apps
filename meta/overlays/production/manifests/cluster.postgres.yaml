@@ -8,6 +8,7 @@ spec:
 
   backup:
     barmanObjectStore:
+      serverName: postgres-recovered
       endpointURL: https://s3.eu-central-003.backblazeb2.com
       destinationPath: s3://meta-postgres-backup
       s3Credentials:
@@ -29,9 +30,6 @@ spec:
   bootstrap:
     recovery:
       source: clusterBackup
-      recoveryTarget:
-        backupID: 20240227T013743
-        targetName: 'restore_point_1'
 
   externalClusters:
   - name: clusterBackup
