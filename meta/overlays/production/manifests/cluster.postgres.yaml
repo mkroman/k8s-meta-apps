@@ -29,9 +29,9 @@ spec:
   bootstrap:
     recovery:
       source: clusterBackup
-      # recoveryTarget:
-      #   backupID: 20230617T011555
-      #   targetImmediate: true
+      recoveryTarget:
+        backupID: 20240227T013743
+        targetName: 'restore_point_1'
 
   externalClusters:
   - name: clusterBackup
