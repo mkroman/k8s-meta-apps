@@ -34,6 +34,7 @@ spec:
   externalClusters:
   - name: clusterBackup
     barmanObjectStore:
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
       destinationPath: s3://meta-postgres-backup
       serverName: postgres
       s3Credentials:
