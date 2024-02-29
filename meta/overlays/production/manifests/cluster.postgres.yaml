@@ -6,6 +6,10 @@ spec:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:14
 
+  inheritedMetadata:
+    labels:
+      team: frontend
+
   backup:
     barmanObjectStore:
       serverName: postgres-recovered
@@ -21,10 +25,6 @@ spec:
         secretAccessKey:
           key: AWS_SECRET_ACCESS_KEY
           name: postgres-backup
-      # tags:
-      #   backupRetentionPolicy: "expire"
-      # historyTags:
-      #   backupRetentionPolicy: "keep"
     retentionPolicy: "30d"
   
   bootstrap:
