@@ -5,7 +5,7 @@ patches:
 
 images:
 - name: rg.nl-ams.scw.cloud/uplink/meta
-  newTag: sha-f7e00b4ef99955a3cafe0726c8c2af719d4229e9
+  newName: sha-8bda2e2215cf8477e3425c25c61063f2128039e8
 
 resources:
 - ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
@@ -15,3 +15,5 @@ resources:
 - ../../base/meta
 - ./manifests/cluster.postgres.yaml
 - ./manifests/scheduledbackup.postgres.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
