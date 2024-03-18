@@ -4,8 +4,12 @@ patches:
     kind: Deployment
 
 images:
-- name: rg.nl-ams.scw.cloud/uplink/meta
-  newName: sha-8bda2e2215cf8477e3425c25c61063f2128039e8
+- name: meta
+  newName: rg.nl-ams.scw.cloud/uplink/meta
+  newTag: sha-8bda2e2215cf8477e3425c25c61063f2128039e8
+- name: meta-mail_reader
+  newName: rg.nl-ams.scw.cloud/uplink/meta-mail_reader
+  newTag: 0.1.8
 
 resources:
 - ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
