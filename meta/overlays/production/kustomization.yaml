@@ -6,7 +6,7 @@ patches:
 images:
 - name: meta
   newName: rg.nl-ams.scw.cloud/uplink/meta
-  newTag: sha-ff4bc27b1e9522b461a4a12a21db12e1f8fd25fb
+  newTag: sha-696ef42ab271445fb33acbb25eaa54bb920dd790
 - name: meta-mail_reader
   newName: rg.nl-ams.scw.cloud/uplink/meta-mail_reader
   newTag: 0.1.8
