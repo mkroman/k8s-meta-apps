@@ -17,7 +17,7 @@ spec:
         env:
         - name: TZ
           value: Europe/Copenhagen
-        args: [-v]
+        args: [-l, trace]
         securityContext:
           capabilities:
             drop:
