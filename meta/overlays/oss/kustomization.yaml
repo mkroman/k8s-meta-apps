@@ -4,6 +4,7 @@ patches:
     kind: Deployment
 resources:
 - ../../base/meta-oss
+- ./manifests/sealedsecret.meta-env.yaml
 
 images:
 - name: meta

@@ -10,3 +10,6 @@ spec:
         env:
         - name: BLUR_ENV
           value: production
+        envFrom:
+        - secretRef:
+            name: meta-env
