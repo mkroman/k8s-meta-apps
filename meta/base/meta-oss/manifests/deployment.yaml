@@ -13,7 +13,7 @@ spec:
       containers:
       # The bot container
       - name: meta-oss
-        image: ghcr.io/rwx-im/meta:edge
+        image: meta:edge
         env:
         - name: TZ
           value: Europe/Copenhagen

@@ -6,5 +6,6 @@ resources:
 - ../../base/meta-oss
 
 images:
-- name: ghcr.io/rwx-im/meta:edge
+- name: meta
+  newName: ghcr.io/rwx-labs/meta-oss
   newTag: sha-5371a49b70fd5d26df5075c17ada6debeb5fafaf
