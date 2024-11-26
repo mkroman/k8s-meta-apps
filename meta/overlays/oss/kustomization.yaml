@@ -9,6 +9,6 @@ resources:
 images:
 - name: meta
   newName: ghcr.io/rwx-labs/meta-oss
-  newTag: sha-189d87ba03a61b8838e5c71ad53db395a59fa4e6
+  newTag: sha-a576acdce5e59d2c4306909baa3524aef3f66cb4
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
