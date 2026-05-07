@@ -1,7 +1,8 @@
 resources:
-- ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
-- ./manifests/sealedsecret.meta-webhook.yaml
-- ./manifests/deployment.yaml
-- ./manifests/service.yaml
-- ./manifests/middleware.yaml
-- ./manifests/ingressroute.yaml
+  - ./manifests/sealedsecret.uplink-nl-ams-scw-registry.yaml
+  - ./manifests/sealedsecret.meta-webhook.yaml
+  - ./manifests/deployment.yaml
+  - ./manifests/service.yaml
+  - ./manifests/middleware.yaml
+  - ./manifests/certificate.yaml
+  - ./manifests/ingressroute.yaml
